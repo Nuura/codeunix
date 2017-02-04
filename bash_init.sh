@@ -34,7 +34,7 @@ echo "User added to sudoers file."
 
 #### prompt
 echo "prompt is modifyng..."
-#echo export PS1="\"\[\033[38;5;8m\][\[$(tput sgr0)\]\[\033[38;5;2m\]\u\[$(tput sgr0)\]\[\033[38;5;8m\]:\[$(tput sgr0)\]\[\033[38;5;117m\]\h\[$(tput sgr0)\]\[\033[38;5;8m\]-\[$(tput sgr0)\]\[\033[38;5;205m\]\W\[$(tput sgr0)\]\[\033[38;5;8m\]]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;7m\]\A\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;208m\]>\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\"" >> /home/$client_name/.bashrc
+echo "PS1=\"\[\033[38;5;8m\][\[$(tput sgr0)\]\[\033[38;5;2m\]\u\[$(tput sgr0)\]\[\033[38;5;8m\]:\[$(tput sgr0)\]\[\033[38;5;117m\]\h\[$(tput sgr0)\]\[\033[38;5;8m\]-\[$(tput sgr0)\]\[\033[38;5;205m\]\W\[$(tput sgr0)\]\[\033[38;5;8m\]]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;7m\]\A\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;208m\]>\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\"" >> /home/$client_name/.bashrc
 
 #MOTD
 echo "MOTD download..."
@@ -43,3 +43,33 @@ mv /etc/motd /etc/motd.old
 rm /etc/motd.old
 linuxlogo -L 16 -f -u -y > /etc/motd
 echo "Done."
+
+
+#mail
+touch ~/.mail.txt~
+ip_adress=$(ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
+mac_adress=$(ifconfig | grep -i HWaddr | tail -c 20)
+
+echo "To: v.tarlowski@gmail.com                                                                                                                                                                                                                                                                                           
+Subject: Information about your Account                                                                                                                                                                                                                                                                                   
+From: assistancePXE@gmail.com                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+Hello,                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                          
+First, thanks you to choice our PXE serveur.                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                          
+You can read below your account Information for use your computer.                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                        
+-adress IP = $ip_adress                                                                                                                                                                                                                                                                                                   
+-adress MAC = $mac_adress                                                                                                                                                                                                                                                                                                 
+-login = $client_name                                                                                                                                                                                                                                                                                                     
+-password = $pass                                                                                                                                                                                                                                                                                                         
+-                                                                                                                                                                                                                                                                                                                         
+-                                                                                                                                                                                                                                                                                                                         
+-                                                                                                                                                                                                                                                                                                                        
+-                                                                                                                                                                                                                                                                                                                        
+-                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                      
+See you soon.                                                                                                                                                                                                                                                                                                              
+" > ~/.mail.txt~
+
+sendmail -vt < ~/.mail.txt~
