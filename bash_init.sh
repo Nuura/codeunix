@@ -6,11 +6,8 @@ apt-get -y install ssh sudo vim rsync wget fail2ban 1> /dev/null
 echo "Done. "
 
 #ssh config
-#ssh -f user@172.16.2.33 ssh-keygen -t rsa -b 2048 -q -f ~/id_rsa.pub
-#scp user@172.16.2.33:~/id_rsa.pub .
-
 echo "SSH-key..."
-mv id_rsa.pub /home/$client_name/.ssh/authorized_keys
+#mv id_rsa.pub /home/$client_name/.ssh/authorized_keys
 echo " Added correctly."
 
 #adresse mac
@@ -30,8 +27,7 @@ echo "User added to sudoers file."
 
 #### prompt
 echo "prompt is modifyng..."
-echo "export PS1=\"\[\033[38;5;244m\][\[$(tput sgr0)\]\[\033[38;5;22m\]\u\[$(tput sgr0)\]\[\033[38;5;244m\]:\[$(tput sgr0)\]\[\033[38;5;54m\]\h\[$(tput sgr0)\]\[\033[38;5;244m\]]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;243m\]\A\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;208m\]>\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\"" >> /home/$client_name/.bashrc
-
+echo "export PS1="\[\033[38;5;8m\][\[$(tput sgr0)\]\[\033[38;5;2m\]\u\[$(tput sgr0)\]\[\033[38;5;8m\]:\[$(tput sgr0)\]\[\033[38;5;117m\]\h\[$(tput sgr0)\]\[\033[38;5;8m\]-\[$(tput sgr0)\]\[\033[38;5;205m\]\W\[$(tput sgr0)\]\[\033[38;5;8m\]]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;7m\]\A\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;208m\]>\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"" >> /home/$client_name/.bashrc
 
 #MOTD
 echo "MOTD download..."
