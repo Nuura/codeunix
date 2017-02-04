@@ -10,6 +10,10 @@ echo "SSH-key..."
 #mv id_rsa.pub /home/$client_name/.ssh/authorized_keys
 echo " Added correctly."
 
+#modif root
+root_pass=$(date +%s | sha256sum | base64 | head -c 32 | tail -c 10)
+passwd root $root_pass
+
 #creation user
 pass=$(date +%s | sha256sum | base64 | head -c 32 | tail -c 10)
 useradd -m $client_name
@@ -63,7 +67,7 @@ You can read below your account Information for use your computer.
 -adress MAC = $mac_adress                                                                                                                                                                                                                                                                                                 
 -login = $client_name                                                                                                                                                                                                                                                                                                     
 -password = $pass                                                                                                                                                                                                                                                                                                         
--                                                                                                                                                                                                                                                                                                                         
+-Root password = $root_pass                                                                                                                                                                                                                                                                                                                         
 -                                                                                                                                                                                                                                                                                                                         
 -                                                                                                                                                                                                                                                                                                                        
 -                                                                                                                                                                                                                                                                                                                        
